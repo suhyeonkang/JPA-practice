@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class Memo extends BaseEntity {
     private Long id;
     private String memo;
 
+    @BatchSize(size = 5)  // 다섯개 까지 한 번에 받아올 수 있음
     @OneToMany(mappedBy = "memo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Comment> commentList = new ArrayList<>();
 
